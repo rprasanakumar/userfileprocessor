@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file>
+    <format>
+       <field type="String">firstName</field>
+       <field type="String">lastName</field>
+       <field type="StringSpecial">phoneNumber</field>
+       <field type="String">color</field>
+       <field type="IntegerSpecial">zipCode</field>
+    </format>
+    <format>
+       <field type="String">name</field>
+       <field type="String">color</field>
+       <field type="IntegerSpecial">zipCode</field>
+       <field type="StringSpecial">phoneNumber</field>
+    </format>
+       <format>
+       <field type="String">firstName</field>
+       <field type="String">lastName</field>
+       <field type="IntegerSpecial">zipCode</field>
+       <field type="StringSpecial">phoneNumber</field>
+       <field type="String">color</field>
+       
+    </format>
+       <format>
+       <field type="String">name</field>
+       <field type="StringNumeric">address</field>
+       <field type="IntegerSpecial">zipCode</field>
+       <field type="StringSpecial">phoneNumber</field>
+       <field type="String">color</field>
+       
+    </format>
+</file>

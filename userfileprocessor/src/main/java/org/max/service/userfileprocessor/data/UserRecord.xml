@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- This is Ibatis mapping XML -->
+
+
+
+<mapper namespace="UserRecord">
+	
+	<resultMap id="result" type="UserRecord">
+	    <result property="iD" column="record_id"/>
+	    <result property="firstName" column="first_name"/>
+	    <result property="lastName" column="last_name"/>
+	    <result property="phoneNumber" column="phone_number"/>
+	    <result property="color" column="color"/>
+	    <result property="zipCode" column="zipcode"/>
+	    <result property="address" column="address"/>
+    </resultMap>
+
+	
+	
+	 <insert id="insertBulkData" parameterType="UserRecord">
+		INSERT INTO UserRecord 
+        (
+            first_name, last_name, phone_number,
+            color, zipcode, address
+        ) 
+    VALUES
+    <foreach collection="usersList" item="model" separator=","> 
+        (           
+            #{model.firstName}, #{model.lastName}, #{model.phoneNumber}, 
+            #{model.color}, #{model.zipCode}, #{model.address}     
+        )
+    </foreach>
+	</insert>
+	
+
+	   
+	   
+</mapper>
+
