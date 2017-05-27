@@ -7,6 +7,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
+import org.max.service.userfileprocessor.service.CommonServiceUserDataImpl;
+import org.max.service.userfileprocessor.service.ICommonService;
 
 import com.mysql.fabric.Response;
 
@@ -17,14 +19,13 @@ import com.mysql.fabric.Response;
  *   
  * @author Prasanna Kumar
  * @version 0.0.1
- * @param  referrer object
  */
 
 
 @Path("/maxservice")
 public class RequestHandler {
 	
-	
+	ICommonService service;
 /*	@POST
 	@Path("/url")
 	public ReferrerURL postUrl(ReferrerURL referrer){
@@ -38,6 +39,16 @@ public class RequestHandler {
 		return referrer;
 	}*/
 	
+	
+	
+	public void getUserColorNCount() {
+		
+		service = new CommonServiceUserDataImpl();
+		service.execute();
+		
+		
+		
+	}
 	
 	
 }

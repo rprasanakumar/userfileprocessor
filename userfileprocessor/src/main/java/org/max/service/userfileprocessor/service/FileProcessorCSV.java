@@ -30,8 +30,10 @@ public class FileProcessorCSV implements IFileProcessor{
 	ArrayList<LinkedHashMap<String,String>>formats;
 	int formatIndex =-1;
 	final int START_READ_FROM_LINE = 1;
-	final String formatPath= FileProcessorCSV.class.getResource("validformats.xml").getPath();
-	final String logPath=FileProcessorCSV.class.getResource("warninglog.log").getPath();
+	/*final String formatPath= FileProcessorCSV.class.getResource("validformats.xml").getPath();
+	final String logPath=FileProcessorCSV.class.getResource("warninglog.log").getPath();*/
+	final String formatPath="config/validformats.xml";
+	final String logPath="warninglog.log";
 	final String message = "Invalid record format line# ";
 	
 	
@@ -119,7 +121,9 @@ public String[] getLineFormat(String[] records){
 			DataTypeFactory factory ;
 			int index=0;
 			for(String record:records){
+				record= record.replaceAll("^\"|\"$", "");
 				factory= new DataTypeFactory(record);
+				records[index] = record;
 				recordFormat[index++]=factory.findFieldDataType().getType();
 			}
 				

@@ -4,6 +4,7 @@ package org.max.service.userfileprocessor.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
@@ -42,7 +43,7 @@ public class UserRecordDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		
 		try {
-			session.insert("UserRecord.insertBulkData",usersList) ;
+			session.insert("UserRecord.insertBulkData",  usersList) ;
 			session.commit();
 		} catch(PersistenceException ex){
 			ex.printStackTrace();
@@ -53,6 +54,27 @@ public class UserRecordDAO {
 	}
 	
 
+	
+
+	/**
+	 * @selects User record .
+	 * @return UserRecord color and count.
+	 */
+	
+	public Map<String,String> selectUserRecordColorNCount(){
+
+		SqlSession session = sqlSessionFactory.openSession();
+		Map<String,String> map=null;
+		try {
+			map = session.selectMap("UserRecord.getColorNPeople", "key");
+			session.commit();
+		} catch(PersistenceException ex){
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return map;
+	}
 
 	
 }

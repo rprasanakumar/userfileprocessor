@@ -9,7 +9,7 @@ public class DataTypeFactory {
 	String field;
 	
 
-	final String regExInteger = "^[0-9]*$";
+	//final String regExInteger = "^[0-9]*$";
 	
 	public DataTypeFactory(String field) {
 		
@@ -19,7 +19,7 @@ public class DataTypeFactory {
 public IDataType findFieldDataType(){
 	
 	if(field!=null && !field.trim().isEmpty() ){
-		field = field.replaceAll("^\"|\"$", "");
+		//field = field.replaceAll("^\"|\"$", "");
 		field = field.trim();
 		if(isString(field)){
 			return new DataTypeString();

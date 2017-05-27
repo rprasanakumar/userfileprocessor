@@ -1,5 +1,6 @@
 package org.max.service.userfileprocessor.dao;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
@@ -27,8 +28,10 @@ public class MyBatisConnectionFactory {
 		try {
 
 			
-			ClassLoader classLoader = MyBatisConnectionFactory.class.getClassLoader();
-			String path = classLoader.getResource("SqlMapConfig.xml").getFile();
+//			ClassLoader classLoader = MyBatisConnectionFactory.class.getClassLoader();
+			//IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			
+			String path = "config/SqlMapConfig.xml";
 
 			if (sqlSessionFactory == null) {
 					Reader reader = Resources.getResourceAsReader(path);

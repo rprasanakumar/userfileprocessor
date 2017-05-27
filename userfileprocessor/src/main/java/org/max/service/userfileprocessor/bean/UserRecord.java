@@ -31,42 +31,6 @@ public class UserRecord implements Comparable<UserRecord>, Serializable {
 	
 	
 	
-	/** IMPORTANT 
-	 *setUser factory method.
-	 *Please include the conditional logic for any new you are adding here
-		
-		*/ 
-	
-public void setUser(String field, String value) {
-		
-		if("firstName".equals(field)) {
-			
-			this.setFirstName(value);
-			
-		}else if("lastName".equals(field)){
-			this.setLastName(value);
-			
-		}else if("name".equals(field)){
-			this.setName(value);
-			
-		}else if("address".equals(field)){
-			this.setAddress(value);
-			
-		}else if("zipCode".equals(field)){
-			this.setZipCode(value);
-			
-		}else if("phoneNumber".equals(field)){
-			this.setPhoneNumber(value);
-			
-		}else if("color".equals(field)){
-			this.setColor(value);
-			
-		}
-		
-		
-	}
-
-
 
 public String getiD() {
 	return iD;
@@ -143,8 +107,62 @@ public String getName() {
 
 private void setName(String name) {
 	this.name = name;
+	
 }
 
+
+
+/** IMPORTANT 
+ *setUser factory method.
+ *Please include the conditional logic for any new  field you are adding here
+	
+	*/ 
+
+public void setUser(String field, String value) {
+	
+	if("firstName".equals(field)) {
+		
+		this.setFirstName(value);
+		
+	}else if("lastName".equals(field)){
+		this.setLastName(value);
+		
+	}else if("name".equals(field)){
+		this.setName(value);
+		if(value!=null) {
+			String[] nameSplit = value.split("\\s+");
+			int size = nameSplit.length;
+			
+			if(size==1) {
+				setFirstName(nameSplit[size-1]);
+				
+			}else if(size>1){
+				String lastName= nameSplit[size-1];
+				String firstName = value.substring(0, value.length()-nameSplit[size-1].length()-1);
+				
+				setLastName(lastName);
+				setFirstName(firstName);
+			}
+			
+		}
+			
+		
+	}else if("address".equals(field)){
+		this.setAddress(value);
+		
+	}else if("zipCode".equals(field)){
+		this.setZipCode(value);
+		
+	}else if("phoneNumber".equals(field)){
+		this.setPhoneNumber(value);
+		
+	}else if("color".equals(field)){
+		this.setColor(value);
+		
+	}
+	
+	
+}
 
 
 
