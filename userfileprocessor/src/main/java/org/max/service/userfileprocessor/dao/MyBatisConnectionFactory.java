@@ -3,6 +3,7 @@ package org.max.service.userfileprocessor.dao;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
+import java.net.URL;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,15 +21,17 @@ public class MyBatisConnectionFactory {
 
 	private static SqlSessionFactory sqlSessionFactory;
 
+
 	static {
 
 		try {
 
-			String resource = "/config/SqlMapConfig.xml";
 			
+			ClassLoader classLoader = MyBatisConnectionFactory.class.getClassLoader();
+			String path = classLoader.getResource("SqlMapConfig.xml").getFile();
 
 			if (sqlSessionFactory == null) {
-					Reader reader = Resources.getResourceAsReader(resource);
+					Reader reader = Resources.getResourceAsReader(path);
 					sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			}
 		}

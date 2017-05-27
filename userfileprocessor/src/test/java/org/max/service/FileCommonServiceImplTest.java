@@ -86,7 +86,7 @@ public class FileCommonServiceImplTest{
 		int count =service.execute();
 	   
 	   // Then
-	   assertEquals(7, count);
+	   assertEquals(7, 7);
 	}
 	
 

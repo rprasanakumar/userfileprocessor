@@ -2,6 +2,7 @@ package org.max.service.userfileprocessor.service;
 
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.max.service.userfileprocessor.bean.UserRecord;
+import org.max.service.userfileprocessor.dao.MyBatisConnectionFactory;
 import org.max.service.userfileprocessor.error.InvaidFormatException;
 import org.max.service.userfileprocessor.utilities.DataTypeFactory;
 import org.max.service.userfileprocessor.utilities.IFormatter;
@@ -28,10 +30,10 @@ public class FileProcessorCSV implements IFileProcessor{
 	ArrayList<LinkedHashMap<String,String>>formats;
 	int formatIndex =-1;
 	final int START_READ_FROM_LINE = 1;
-	final String formatPath="C:\\Users\\praje\\Documents\\Studies\\workspace\\myapp\\userfileprocessor\\src\\main\\java\\config\\validformats.xml";
-	final String logPath="C:\\Users\\praje\\Documents\\Studies\\workspace\\myapp\\userfileprocessor\\warninglog.log";
+	final String formatPath= FileProcessorCSV.class.getResource("validformats.xml").getPath();
+	final String logPath=FileProcessorCSV.class.getResource("warninglog.log").getPath();
 	final String message = "Invalid record format line# ";
-
+	
 	
 	
 	
