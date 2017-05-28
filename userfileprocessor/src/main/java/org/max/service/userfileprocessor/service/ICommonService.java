@@ -1,5 +1,7 @@
 package org.max.service.userfileprocessor.service;
 
+import java.util.List;
+
 public interface ICommonService {
-	public int execute()	;	
+	public  List<? extends Object>  execute()	;	
 }

@@ -46,6 +46,11 @@
 		select color as COLOR ,count(color) as COUNT from  maxDBservice.USERRECORD 
 		group by color order by COUNT desc
     </select>
+    
+    <select id="getAll" resultMap="result">
+		select first_name,last_name,color from  maxDBservice.USERRECORD 
+    </select>
+    
 
 	   
 	   

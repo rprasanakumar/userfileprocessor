@@ -2,10 +2,14 @@ package org.max.service;
 
 import  org.junit.Assert.*;
 import org.max.service.userfileprocessor.bean.UserRecord;
+import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.service.CommonServiceUserDataImpl;
 import org.max.service.userfileprocessor.service.FileCommonServiceImpl;
 import org.max.service.userfileprocessor.service.FileProcessorCSV;
 import org.max.service.userfileprocessor.service.ICommonService;
+import org.max.service.userfileprocessor.service.IUserDataDisplay;
+import org.max.service.userfileprocessor.service.UserDataDisplayColor;
+import org.max.service.userfileprocessor.service.UserDataDisplayColorName;
 import org.junit.Before;
 
 
@@ -67,18 +71,38 @@ public class CommonServiceUserDataImplTest{
 	 * 
 	 * Method checks the Number of records being pulled 
 	 */
-	@Test
+	//@Test
 	public void givenRecords_whenRecordsProcessed_thenNumberOfRecordsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given
-		
-		ICommonService service = new CommonServiceUserDataImpl();
+		IUserDataDisplay display =  new UserDataDisplayColor();
+		ICommonService service = new CommonServiceUserDataImpl(display);
 	   
 	   // When
-		int count =service.execute();
+		List<UserRecordDisplay> record=(List<UserRecordDisplay>) service.execute();
 	   
 	   // Then
-	   assertEquals(5, count);
+	   assertEquals(5, record.size());
+	}
+	
+	
+	
+	/**
+	 * 
+	 * Method checks the Number of records being pulled 
+	 */
+	@Test
+	public void givenRecordsandColor_whenRecordsProcessed_thenNumberOfRecordsReceived()
+	      throws ClientProtocolException, IOException{
+	   // Given
+		IUserDataDisplay display =  new UserDataDisplayColorName();
+		ICommonService service = new CommonServiceUserDataImpl(display);
+	   
+	   // When
+		List<UserRecordDisplay> record=(List<UserRecordDisplay>) service.execute();
+	   
+	   // Then
+	   assertEquals(5, record.size());
 	}
 	
 

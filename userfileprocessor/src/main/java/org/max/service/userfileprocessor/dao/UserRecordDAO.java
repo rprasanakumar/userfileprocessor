@@ -61,19 +61,38 @@ public class UserRecordDAO {
 	 * @return UserRecord color and count.
 	 */
 	
-	public Map<String,String> selectUserRecordColorNCount(){
+	public Map<String,Integer> selectUserRecordColorNCount(){
 
 		SqlSession session = sqlSessionFactory.openSession();
-		Map<String,String> map=null;
+		Map<String,Integer> map=null;
 		try {
-			map = session.selectMap("UserRecord.getColorNPeople", "key");
-			session.commit();
+			map = (Map<String,Integer>)session.selectMap("UserRecord.getColorNPeople", "key");
 		} catch(PersistenceException ex){
 			ex.printStackTrace();
 		}finally {
 			session.close();
 		}
 		return map;
+	}
+	
+	
+	/**
+	 * @selects User record .
+	 * @return All UserRecord .
+	 */
+	
+	public List<UserRecord> selectUserRecord(){
+
+		SqlSession session = sqlSessionFactory.openSession();
+		List<UserRecord> listUserRecord=null;
+		try {
+			listUserRecord = (List<UserRecord>)session.selectList("UserRecord.getAll");
+		} catch(PersistenceException ex){
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return listUserRecord;
 	}
 
 	

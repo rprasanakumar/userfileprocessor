@@ -100,8 +100,10 @@ public String getColor() {
 private void setColor(String color) {
 	this.color = color;
 }
+
+
 public String getName() {
-	return name;
+	return this.getFirstName()+" "+this.getLastName();
 }
 
 

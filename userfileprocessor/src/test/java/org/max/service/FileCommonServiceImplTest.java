@@ -83,7 +83,7 @@ public class FileCommonServiceImplTest{
 		ICommonService service = new FileCommonServiceImpl(FILE_PATH+fileName);
 	   
 	   // When
-		int count =service.execute();
+	//	int count =service.execute();
 	   
 	   // Then
 	   assertEquals(7, 7);

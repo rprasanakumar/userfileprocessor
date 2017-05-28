@@ -7,8 +7,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
+import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.service.CommonServiceUserDataImpl;
 import org.max.service.userfileprocessor.service.ICommonService;
+import org.max.service.userfileprocessor.service.IUserDataDisplay;
+import org.max.service.userfileprocessor.service.UserDataDisplayColor;
+import org.max.service.userfileprocessor.service.UserDataDisplayColorName;
 
 import com.mysql.fabric.Response;
 
@@ -26,29 +30,37 @@ import com.mysql.fabric.Response;
 public class RequestHandler {
 	
 	ICommonService service;
-/*	@POST
-	@Path("/url")
-	public ReferrerURL postUrl(ReferrerURL referrer){
+	/**
+	 * 
+	 * @post request handler method with
+	 * @param ReferrerURL object
+	 *
+	 */
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+@Path("/user/color")
 		
-		try {
-			service = new ReferrerServiceImplementation(referrer);
-			return service.putDataURL();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();	
-		}
-		return referrer;
-	}*/
+public List<UserRecordDisplay> getUserColorCount() {
+		IUserDataDisplay displayType = new UserDataDisplayColor();
+		service = new CommonServiceUserDataImpl(displayType);
+		 List<UserRecordDisplay> record = (List<UserRecordDisplay>) service.execute();
+		 
+		 return record;
+}
+
+
+
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+@Path("/user/color/name")
 	
 	
-	
-	public void getUserColorNCount() {
-		
-		service = new CommonServiceUserDataImpl();
-		service.execute();
-		
-		
-		
-	}
+public List<UserRecordDisplay> getUserColorCountUserName() {
+	IUserDataDisplay displayType = new UserDataDisplayColorName();
+	service = new CommonServiceUserDataImpl(displayType);
+	List<UserRecordDisplay> record = (List<UserRecordDisplay>) service.execute();
+	return record;
+}
 	
 	
 }

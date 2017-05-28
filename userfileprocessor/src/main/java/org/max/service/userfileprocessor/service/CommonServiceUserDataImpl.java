@@ -3,17 +3,20 @@ package org.max.service.userfileprocessor.service;
 import java.util.List;
 import java.util.Map;
 
+import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.dao.UserRecordDAO;
 
 public class CommonServiceUserDataImpl implements ICommonService{
 	
+	IUserDataDisplay displayType;
+	public CommonServiceUserDataImpl(IUserDataDisplay displayType) {
+		this.displayType = displayType;
+	}
 
 	@Override
-	public int execute() {
+	public List<UserRecordDisplay> execute() {
 
-		UserRecordDAO dao = new UserRecordDAO();
-		Map<String, String> map = dao.selectUserRecordColorNCount();
-		return map.size();
+		return this.displayType.pullData();
 	}
 
 }

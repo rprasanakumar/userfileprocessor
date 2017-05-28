@@ -17,15 +17,14 @@ public class FileCommonServiceImpl implements ICommonService{
 	}
 	
 	@Override
-	public int execute() {
-		int countRecord =0;
+	public List<UserRecord> execute() {
 		dao = new UserRecordDAO();
 		processor = new FileProcessorCSV(this.path);
 		List<UserRecord> recordList= processor.parse();
 		if(!recordList.isEmpty()) {
-			countRecord = dao.insertUserRecordFile(recordList);
+			dao.insertUserRecordFile(recordList);
 		}
-		return countRecord;
+		return recordList;
 		
 	}
 	
