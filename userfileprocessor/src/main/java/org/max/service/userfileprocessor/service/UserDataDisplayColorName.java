@@ -12,17 +12,33 @@ import java.util.Set;
 import org.max.service.userfileprocessor.bean.UserRecord;
 import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.dao.UserRecordDAO;
+/** 
+ * Service class implementing  IUserDataDisplay interface
+ *   
+ * @author Prasanna Kumar
+ * @version 0.0.1
+ */
 
 public class UserDataDisplayColorName implements IUserDataDisplay{
+	
+	
+	/**
+	 * Sevice method for connecting to DAO layer to pull user record to display
+	 * 
+	 *@param user query
+	 * 
+	 *@return list of type  UserRecordDisplay
+	 * 
+	 */
 
 	@Override
-	public List<UserRecordDisplay> pullData() {
+	public List<UserRecordDisplay> pullData(String query) {
 
 		
 		UserRecordDAO dao = new UserRecordDAO(); 
 		List<UserRecord> listUserRecord = dao.selectUserRecord();
 		ArrayList<UserRecordDisplay> result = new ArrayList<UserRecordDisplay>();
-		UserRecordDisplay userData= new UserRecordDisplay(); 
+		UserRecordDisplay userData; 
 		HashMap<String,ArrayList<String>> userColorMap = new HashMap<String,ArrayList<String>>();
 		for(UserRecord list :listUserRecord) {
 			String key = list.getColor();
@@ -52,14 +68,13 @@ public class UserDataDisplayColorName implements IUserDataDisplay{
 			}
 			
 		});
-		
-		
 		for(String key:userColorMap.keySet()) {
-			
+			userData= new UserRecordDisplay();
 			ArrayList<String> valueSet = userColorMap.get(key);
 			Collections.sort(valueSet);
+			Collections.reverse(valueSet);
 			userData.setColor(key);
-			userData.setCount(valueSet.size());
+			userData.setCount((Long.valueOf(valueSet.size())));
 			userData.setName(valueSet);
 			result.add(userData);
 					

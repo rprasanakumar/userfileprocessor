@@ -64,7 +64,7 @@ public class RequestHandlerTest {
 	 */
 	
 	public static final String BASE_URI = "http://localhost:8080/userfileprocessor/webapi/maxservice/";
-	@Test
+	//@Test
 	public void givenEndpointoftopURL_whenHTTPRequestIsMade_then200IsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given

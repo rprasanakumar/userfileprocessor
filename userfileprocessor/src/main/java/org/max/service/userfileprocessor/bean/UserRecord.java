@@ -7,6 +7,7 @@ import java.io.Serializable;
 /** 
  * @author Prasanna Kumar
  * @version 0.0.1
+ * POJO class to hold user record
  */
 
 public class UserRecord implements Comparable<UserRecord>, Serializable {
@@ -20,14 +21,15 @@ public class UserRecord implements Comparable<UserRecord>, Serializable {
 	
 	
 	
-	private String iD;
-	private String firstName;
-	private String lastName;
-	private String name;
-	private String address;
-	private String zipCode;
-	private String phoneNumber;
-	private String color;
+private String iD;
+private String firstName;
+private String lastName;
+private String name;
+private String address;
+private String zipCode;
+private String phoneNumber;
+private String color;
+private String path;
 	
 	
 	
@@ -112,6 +114,15 @@ private void setName(String name) {
 	
 }
 
+public String getPath() {
+	return path;
+}
+
+
+
+public void setPath(String path) {
+	this.path = path;
+}
 
 
 /** IMPORTANT 
@@ -167,15 +178,9 @@ public void setUser(String field, String value) {
 }
 
 
-
-
-
-
 public int compareTo(UserRecord o) {
 	return this.getLastName().compareTo(o.getLastName());
 }
-
-
 
 
 

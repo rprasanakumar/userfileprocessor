@@ -3,6 +3,14 @@ package org.max.service.userfileprocessor.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+/** 
+ * @author Prasanna Kumar
+ * @version 0.0.1
+ * POJO class to hold user display variables
+ */
+
+
 public class UserRecordDisplay implements Comparable<UserRecordDisplay>, Serializable{
 
 	/**
@@ -13,7 +21,9 @@ public class UserRecordDisplay implements Comparable<UserRecordDisplay>, Seriali
 	private static final long serialVersionUID = -7657736727284509557L;
 	
 	
-	
+	private String color;
+	private Long count;
+	private ArrayList<String> name;
 	
 	public String getColor() {
 		return color;
@@ -27,13 +37,13 @@ public class UserRecordDisplay implements Comparable<UserRecordDisplay>, Seriali
 
 
 
-	public int getCount() {
+	public Long getCount() {
 		return count;
 	}
 
 
 
-	public void setCount(int count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 
@@ -51,9 +61,7 @@ public class UserRecordDisplay implements Comparable<UserRecordDisplay>, Seriali
 
 
 
-	private String color;
-	private Integer count;
-	private ArrayList<String> name;
+
 	
 	
 
@@ -61,7 +69,7 @@ public class UserRecordDisplay implements Comparable<UserRecordDisplay>, Seriali
 	public int compareTo(UserRecordDisplay arg0) {
 		// TODO Auto-generated method stub
 		
-		return this.count.compareTo(arg0.count);
+		return arg0.count.compareTo(this.count);
 	}
 
 }

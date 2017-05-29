@@ -28,9 +28,6 @@ public class MyBatisConnectionFactory {
 		try {
 
 			
-//			ClassLoader classLoader = MyBatisConnectionFactory.class.getClassLoader();
-			//IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			
 			String path = "config/SqlMapConfig.xml";
 
 			if (sqlSessionFactory == null) {

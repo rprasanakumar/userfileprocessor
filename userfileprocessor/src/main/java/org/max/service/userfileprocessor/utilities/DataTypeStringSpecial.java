@@ -1,5 +1,11 @@
 package org.max.service.userfileprocessor.utilities;
-
+/** 
+ * class for loading the DataType of the record
+ * 
+ *   
+ * @author Prasanna Kumar
+ * @version 0.0.1
+ */
 public class DataTypeStringSpecial implements IDataType{
 
 	@Override

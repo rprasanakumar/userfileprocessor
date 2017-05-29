@@ -3,23 +3,41 @@ package org.max.service.userfileprocessor.utilities;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/** 
+ * Factory class for dynamically deducing the DataType of each column of each record
+ * 
+ *   
+ * @author Prasanna Kumar
+ * @version 0.0.1
+ */
+
+
 public class DataTypeFactory {
 	
 	IDataType data;
 	String field;
 	
-
-	//final String regExInteger = "^[0-9]*$";
 	
 	public DataTypeFactory(String field) {
 		
 		this.field = field;
 	}
 	
+	
+	/**
+	 * Sevice method for getting the Data type of the record
+	 * 
+	 * Null type is returned if not Data type matches
+	 * Uses Regular Expressions to find the Data type
+	 * 
+	 *@param user query
+	 * 
+	 *@return list of type  UserRecordDisplay
+	 * 
+	 */
 public IDataType findFieldDataType(){
 	
 	if(field!=null && !field.trim().isEmpty() ){
-		//field = field.replaceAll("^\"|\"$", "");
 		field = field.trim();
 		if(isString(field)){
 			return new DataTypeString();

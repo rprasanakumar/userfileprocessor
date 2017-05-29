@@ -13,6 +13,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/** 
+ * Service class implementing  ICommonService IFormatter
+ *   
+ * @author Prasanna Kumar
+ * @version 0.0.1
+ */
+
+
+
 public class VaildFormatXML implements IFormatter{
 	
 	String pathXml ;
@@ -23,6 +32,14 @@ public class VaildFormatXML implements IFormatter{
 		this.pathXml = path;
 	}
 
+	/**
+	 * Sevice method for pulling the valid formats configured in (/config/validformats.xml)
+	 * 
+	 *@return list of type  LinkedHashMap
+	 * 
+	 */
+	
+	
 	@Override
 	public ArrayList<LinkedHashMap<String,String>> getVaildFormat() throws InvaidFormatException {
 		

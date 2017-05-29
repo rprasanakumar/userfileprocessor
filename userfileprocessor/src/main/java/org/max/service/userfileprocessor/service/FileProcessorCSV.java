@@ -22,6 +22,16 @@ import au.com.bytecode.opencsv.*;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
+/** 
+ * Service class implementing  IFileProcessor interface
+ *   
+ * @author Prasanna Kumar
+ * @version 0.0.1
+ */
+
+
+
+
 public class FileProcessorCSV implements IFileProcessor{
 	
 	Logger logger = Logger.getLogger("WarningLog"); 
@@ -44,6 +54,17 @@ public class FileProcessorCSV implements IFileProcessor{
 		this.filePath = path;
 	}
 
+	
+	/**
+	 * Sevice method for parsing the CSV file
+	 * 
+	 * This method takes the valid format of record dynamically from the XML configuration (refer VaildFormatXML.getVaildFormat() )
+	 * 
+	 *@return list of type  UserRecord
+	 * 
+	 */
+	
+	
 	@Override
 	public List<UserRecord> parse() {
 		int recordLineNumber =1;
@@ -113,6 +134,16 @@ public class FileProcessorCSV implements IFileProcessor{
 		return recordList;
 	}
 	
+	
+	
+	/**
+	 * Helper method for Identifying the current record's format from the file 
+	 * 
+	 * This method verifies the format of record from the DataTypes in the utilities package
+	 * 
+	 *@return String array
+	 * 
+	 */
 public String[] getLineFormat(String[] records){
 			
 			
@@ -135,7 +166,14 @@ public String[] getLineFormat(String[] records){
 	}
 	
 	
-	
+/**
+ * Helper method for checking whether a record is a valid or not based on the Valid format configuration in the XML 
+ * 
+ * This method verifies the format of record from the DataTypes in the utilities package
+ * 
+ *@return boolean
+ * 
+ */
 	
 	public boolean isLineFormatVaildate(String[] recordFormat){
 		
