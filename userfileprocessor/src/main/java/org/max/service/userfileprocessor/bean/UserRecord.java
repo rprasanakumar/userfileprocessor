@@ -30,6 +30,7 @@ private String zipCode;
 private String phoneNumber;
 private String color;
 private String path;
+private String lat;
 	
 	
 	
@@ -124,6 +125,19 @@ public void setPath(String path) {
 	this.path = path;
 }
 
+public String getLat() {
+	return lat;
+}
+
+
+
+public void setLat(String lat) {
+	this.lat = lat;
+}
+
+
+
+
 
 /** IMPORTANT 
  *setUser factory method.
@@ -181,6 +195,9 @@ public void setUser(String field, String value) {
 public int compareTo(UserRecord o) {
 	return this.getLastName().compareTo(o.getLastName());
 }
+
+
+
 
 
 

@@ -42,6 +42,20 @@
 	
 	
 	
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO maxDBservice.USERRECORD 
+        (
+            first_name, last_name, phone_number,
+            color, zipcode, address
+        ) 
+    VALUES
+        (           
+            #{firstName}, #{lastName}, #{phoneNumber}, 
+            #{color}, #{zipCode}, #{address}     
+        )
+	</insert>
+	
+	
 	<select id="getColorNPeople" parameterType="map" resultMap="dataMap">
 		select color as COLOR ,count(color) as COUNT from  maxDBservice.USERRECORD 
 		group by color order by COUNT desc

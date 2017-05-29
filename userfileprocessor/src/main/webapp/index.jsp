@@ -11,11 +11,15 @@
     </title>
 	<script>
 	
-
 	
 	
+	function onLoad() {
+		getLocation();
+		 document.getElementById("urlformtext").value = "{\"firstName\":\"Donald\",\"lastName\":\"Duck\",\"address\":\"12 street\",\"zipCode\":\"99999\",\"phoneNumber\":\"(890)-890-9090\",\"color\":\"Red\"}";
+	}
 	
-	function getColor(){
+	function getColor(){		
+	
 		var urlColor = "webapi/user/color";
 		var client = new XMLHttpRequest();
 		client.open("GET", urlColor, false);
@@ -58,11 +62,14 @@
 		if(query==""){
 			query ="all"
 		}
-		var urlVenue = "webapi/user/venue/"+query;
+		
 		var client = new XMLHttpRequest();
-
+		var lat =document.getElementById("lat").value;
+		if(lat==null || lat=="" ){
+			lat = "35.3280913,-80.8172195";
+		}
+		var urlVenue = "webapi/user/venue/"+query+"/"+lat;
 		client.open("GET", urlVenue, false);
-
 		client.setRequestHeader("Content-Type", "application/json");
 
 		client.send();
@@ -75,25 +82,45 @@
 		   
 	}
 	
-	
-/* 	function putFile(){
-		alert("Inside");
-		var url = "webapi/user/file/";
+	function urlPost(){
+		var url = "webapi/user/sendrecord";
+		var urlformtext = document.getElementById("urlformtext").value;
 		var client = new XMLHttpRequest();
-		var file = document.getElementById("file").value;
+		if(urlformtext==null || urlformtext==""){
+			
+			alert("JSON cannot be empty");
+			return;
+		}
+		
+
 		client.open("POST", url, false);
 
-		client.setRequestHeader("Content-Type", "multipart/form-data");
+		client.setRequestHeader("Content-Type", "application/json");
 
-		client.send(file);
+		client.send(urlformtext);
 
 		if (client.status == 200){
 			document.getElementById("response").value = client.responseText;
 			
-		} */
+		}
 		    
 		   
 	}
+	
+
+
+
+	function getLocation() {
+	    if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(showPosition);
+	    }
+	}
+
+	function showPosition(position) {
+		 document.getElementById("lat").value = position.coords.latitude +"," + position.coords.longitude;
+	}
+	
+	
 
 </script>
   
@@ -110,7 +137,7 @@
 }
    </style>
     </head>
-<body>
+<body onload="onLoad()">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -131,21 +158,39 @@
 
 		<div id="wrapper">
 			<font color="red">${displayContent}</font>
-			<br>
-			Select a file to Upload<br><br>
+			<br><H4>Select a file to Upload</H4>
 			
 		<form name="groupUpload" method ="post" action="webapi/user/file/" enctype="multipart/form-data" >
 	
 		    <input type='file' name='file'><br><br>
 		    <input type='submit' name='upload_btn' value='upload' >
 		</form>
+		
+			<font color="red">${displayContent}</font>
+			<br><H4>Input a single row in JSON format</H4>(edit any record below)
+		
+		 <form name="urlform"  accept-charset="UTF-8" action="javascript:void(0);" method="post">
+		 
+		 <input type="text" id="lat"><br>
+		 
+   			 <span> <textarea id="urlformtext" cols="100" > 
+			</textarea></span>
+ 
+
+        	  <br><br>
+
+       		 <button  type="submit" class="yj-btn"  onclick="urlPost()" ><span>Send</span></button>
+		</form>
 		</div>
 
-
+		
+		
+			
 <!-- <input placeholder="Response" type="textarea" id="response" name="response" readonly/> -->
-
+<span>
 <textarea id="response" cols="10" readonly> 
 </textarea>
+</span>
 
 <br>
 

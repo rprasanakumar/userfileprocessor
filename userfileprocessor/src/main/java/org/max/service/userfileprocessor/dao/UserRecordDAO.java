@@ -24,6 +24,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.max.service.userfileprocessor.bean.UserRecord;
+import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.bean.UserVenue;
 
 
@@ -78,7 +79,27 @@ public class UserRecordDAO {
 		}
 		return usersList.size();
 	}
+
 	
+	/**
+	 * @inserts One User file record.
+	 * @return UserRecord insert ID.
+	 */
+	
+	public UserRecord insertUserRecord(UserRecord record){
+
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		try {
+			session.insert("UserRecord.insert",record) ;
+			session.commit();
+		} catch(PersistenceException ex){
+			ex.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return record;
+	}
 
 	
 
@@ -129,13 +150,19 @@ public class UserRecordDAO {
 	 * @throws ParseException 
 	 */
 	
-	public List<String> searchUserVenue(String query){
+	public List<String> searchUserVenue(String query,UserRecord rec){
 		
 		List<String> venueList = new ArrayList<String>();
 		try {
-			
+
 			String urlEndPoint = BASE_URL+"client_id="+CLIENT_ID+
-					"&client_secret="+CLIENT_SECRET+"&v="+VER_NO+"&ll="+defaultLocation+"&query="+query;
+					"&client_secret="+CLIENT_SECRET+"&v="+VER_NO+"&ll=";
+			
+			if(rec!=null && rec.getLat()!=null && !rec.getLat().isEmpty()) {
+				defaultLocation=rec.getLat();
+			}
+			
+			urlEndPoint=urlEndPoint+defaultLocation+"&query="+query;
 		JSONParser parser = new JSONParser();
 		URL url = new URL(urlEndPoint);
 		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();

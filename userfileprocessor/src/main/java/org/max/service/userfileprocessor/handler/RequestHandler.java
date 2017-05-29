@@ -16,6 +16,7 @@ import org.max.service.userfileprocessor.service.CommonServiceUserDataImpl;
 import org.max.service.userfileprocessor.service.FileCommonServiceImpl;
 import org.max.service.userfileprocessor.service.ICommonService;
 import org.max.service.userfileprocessor.service.IUserDataDisplay;
+import org.max.service.userfileprocessor.service.RecordCommonServiceImpl;
 import org.max.service.userfileprocessor.service.UserDataDisplayAPI;
 import org.max.service.userfileprocessor.service.UserDataDisplayColor;
 import org.max.service.userfileprocessor.service.UserDataDisplayColorName;
@@ -96,12 +97,14 @@ public List<UserRecordDisplay> getUserColorCountUserName() {
 
 @GET
 @Produces(MediaType.APPLICATION_JSON)
-@Path("venue/{venueQuery}")
+@Path("venue/{venueQuery}/{location}")
 	
 	
-public List<UserVenue> getUserVenue(@PathParam("venueQuery") String venueQuery) {
+public List<UserVenue> getUserVenue(@PathParam("venueQuery") String venueQuery,@PathParam("location") String location) {
 	String query =venueQuery;
-	IUserDataDisplay displayType = new UserDataDisplayAPI();
+	UserRecord user = new UserRecord();
+	user.setLat(location);
+	IUserDataDisplay displayType = new UserDataDisplayAPI(user);
 	service = new CommonServiceUserAPIImpl(displayType,query);
 	List<UserVenue> record = (List<UserVenue>) service.execute();
 	
@@ -123,16 +126,39 @@ public List<UserVenue> getUserVenue(@PathParam("venueQuery") String venueQuery) 
 public  List<UserRecordDisplay> postUserFile(
         @FormDataParam("file") InputStream uploadedInputStream,
         @FormDataParam("file") FormDataContentDisposition fileDetail){
-	String path ="/temp/";
+	String path ="/tmp/";
 	List<UserRecordDisplay> resultList;
 	String fileLocation = path
 	            + fileDetail.getFileName();
 	FileCommonServiceImpl service = new FileCommonServiceImpl(fileLocation);
 	 service.writeFile(uploadedInputStream, fileLocation);
 	 resultList= (List<UserRecordDisplay>) service.execute();
-	
+	 
 	return resultList;
 }
+
+
+/**
+ * 
+ * @post request handler method for posting one record
+ * @param ReferrerURL object
+ *
+ */
+@POST
+@Path("sendrecord")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+
+public  List<UserRecord> postUserRecord(UserRecord record){
+
+	service = new RecordCommonServiceImpl(record);
+	List<UserRecord> resultList = (List<UserRecord>) service.execute();
+	return resultList;
+}
+
+
+
+
 
 	
 }

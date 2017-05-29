@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.max.service.userfileprocessor.bean.UserRecord;
 import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.bean.UserVenue;
 import org.max.service.userfileprocessor.dao.UserRecordDAO;
@@ -19,7 +20,10 @@ import org.max.service.userfileprocessor.dao.UserRecordDAO;
 
 public class UserDataDisplayAPI implements IUserDataDisplay{
 	
-	
+	UserRecord rec;
+	public UserDataDisplayAPI(UserRecord rec) {
+		this.rec = rec;
+	}
 	/**
 	 * Sevice method for connecting to DAO layer to pull the Venues from the API
 	 * 
@@ -34,7 +38,7 @@ public class UserDataDisplayAPI implements IUserDataDisplay{
 
 		List<String> resultList ;
 		UserRecordDAO dao = new UserRecordDAO(); 
-		resultList = dao.searchUserVenue(query);
+		resultList = dao.searchUserVenue(query,rec);
 		Collections.sort(resultList);
 		return resultList;
 	
