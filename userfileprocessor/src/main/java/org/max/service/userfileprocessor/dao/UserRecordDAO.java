@@ -49,7 +49,7 @@ public class UserRecordDAO {
 	String BASE_URL = "https://api.foursquare.com/v2/venues/search?";
 	final String CLIENT_ID= "J1KRSNZ2SUYEJS54AUVNO0UGCECUZC3PCJMRAMRW3K3Y4WWQ";
 	final String CLIENT_SECRET= "VHL5NFBWJ2IJD51S4FVCDWYZL40RR4S0XUXMWYULQX4DDYIE";
-	String defaultLocation = "35.3219002,-80.7568182";
+	String defaultLocation = "35.3219002,-80.7568182";// this is the default if the dynamic loading is not working
 	final String VER_NO = "20170101";
 
 	

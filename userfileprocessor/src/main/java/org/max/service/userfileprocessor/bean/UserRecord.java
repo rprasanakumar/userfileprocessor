@@ -21,7 +21,7 @@ public class UserRecord implements Comparable<UserRecord>, Serializable {
 	
 	
 	
-private String iD;
+private Long id;
 private String firstName;
 private String lastName;
 private String name;
@@ -35,15 +35,6 @@ private String lat;
 	
 	
 
-public String getiD() {
-	return iD;
-}
-
-
-
-public void setiD(String iD) {
-	this.iD = iD;
-}
 
 public String getFirstName() {
 	return firstName;
@@ -137,6 +128,16 @@ public void setLat(String lat) {
 
 
 
+public Long getId() {
+	return id;
+}
+
+
+
+public void setId(Long id) {
+	this.id = id;
+}
+
 
 
 /** IMPORTANT 
@@ -195,6 +196,8 @@ public void setUser(String field, String value) {
 public int compareTo(UserRecord o) {
 	return this.getLastName().compareTo(o.getLastName());
 }
+
+
 
 
 

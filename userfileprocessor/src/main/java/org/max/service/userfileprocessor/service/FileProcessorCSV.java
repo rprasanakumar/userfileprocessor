@@ -34,21 +34,25 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 public class FileProcessorCSV implements IFileProcessor{
 	
-	Logger logger = Logger.getLogger("WarningLog"); 
+	
+	
+	final String logPath="/tmp/warninglog.log";
+	Logger logger = Logger.getLogger(logPath); 
 	
 	String filePath;
-	ArrayList<LinkedHashMap<String,String>>formats;
 	int formatIndex =-1;
 	final int START_READ_FROM_LINE = 1;
 	/*final String formatPath= FileProcessorCSV.class.getResource("validformats.xml").getPath();
 	final String logPath=FileProcessorCSV.class.getResource("warninglog.log").getPath();*/
 	final String formatPath="config/validformats.xml";
-	final String logPath="warninglog.log";
+	
 	final String message = "Invalid record format line# ";
 	
 	
 	
-	
+	public FileProcessorCSV() {
+		
+	}
 	public  FileProcessorCSV(String path) {
 		
 		this.filePath = path;
@@ -82,20 +86,20 @@ public class FileProcessorCSV implements IFileProcessor{
 				// get valid format from config XML --validformats from config folder
 				
 				IFormatter formatter = new VaildFormatXML(formatPath);
-				this.formats= formatter.getVaildFormat();
+				ArrayList<LinkedHashMap<String,String>>formats = formatter.getVaildFormat();
 				
 			      while((records = csvReader.readNext())!=null)
 		            {
 			    	  uRecordBean = new UserRecord();
 			    	  String[] recordFormat = getLineFormat(records);
 			    	  int indexRecord =0;
-			    	  boolean isRecordValid = isLineFormatVaildate(recordFormat);
+			    	  boolean isRecordValid = isLineFormatVaildate(recordFormat,formats);
 			    	  if(isRecordValid){
 			    		  mappingStrategy = new ColumnPositionMappingStrategy<UserRecord>();
 				          mappingStrategy.setType(UserRecord.class);
 				            
 				            //Set recordformat for mappingStrategy
-				            String[] recordFieldsMap = this.formats.get(formatIndex).keySet().toArray(new String[this.formats.get(formatIndex).size()]);
+				            String[] recordFieldsMap = formats.get(formatIndex).keySet().toArray(new String[formats.get(formatIndex).size()]);
 				            for(String field:recordFieldsMap) {
 				            	uRecordBean.setUser(field, records[indexRecord++].trim());
 				            }
@@ -175,12 +179,12 @@ public String[] getLineFormat(String[] records){
  * 
  */
 	
-	public boolean isLineFormatVaildate(String[] recordFormat){
+	public boolean isLineFormatVaildate(String[] recordFormat, ArrayList<LinkedHashMap<String,String>>formats){
 		
 		boolean isValidFormat =false;
 			
 			int index =0;
-			for(LinkedHashMap<String, String> format: this.formats){
+			for(LinkedHashMap<String, String> format: formats){
 				
 				if(Arrays.equals(format.values().toArray(), recordFormat)){
 					this.formatIndex =index;

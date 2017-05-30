@@ -121,6 +121,23 @@
 	}
 	
 	
+	function getLog(){
+			
+		var client = new XMLHttpRequest();
+		var urlVenue = "webapi/user/getlogfile/";
+		client.open("GET", urlVenue, false);
+		client.setRequestHeader("Content-Type", "application/json");
+
+		client.send();
+
+		if (client.status == 200){
+			document.getElementById("response").value = client.responseText;
+			
+		}
+		    
+		   
+	}
+	
 
 </script>
   
@@ -155,12 +172,30 @@
 				<!-- Main -->
 <section id="main">
 
+<br>
 
+<!-- <input placeholder="Response" type="textarea" id="response" name="response" readonly/> -->
+<form name="groupUpload" method ="post" action="javascript:void(0);" enctype="multipart/form-data" >
+<span>
+Response Pan for all your request
+<textarea id="response" cols="10" readonly> 
+</textarea>
+</span>
+	<br><br>
+
+     	 <button  type="submit" class="yj-btn" onclick="getColor()" ><span>Get Color Count</span></button>
+		 <button  type="submit" class="yj-btn" onclick="getColorNname()" ><span>Get Color Count Name</span></button>
+		 
+		 </form>
 		<div id="wrapper">
 			<font color="red">${displayContent}</font>
 			<br><H4>Select a file to Upload</H4>
 			
+			
+			
 		<form name="groupUpload" method ="post" action="webapi/user/file/" enctype="multipart/form-data" >
+		
+		
 	
 		    <input type='file' name='file'><br><br>
 		    <input type='submit' name='upload_btn' value='upload' >
@@ -171,7 +206,7 @@
 		
 		 <form name="urlform"  accept-charset="UTF-8" action="javascript:void(0);" method="post">
 		 
-		 <input type="text" id="lat"><br>
+		 <br>
 		 
    			 <span> <textarea id="urlformtext" cols="100" > 
 			</textarea></span>
@@ -186,31 +221,41 @@
 		
 		
 			
-<!-- <input placeholder="Response" type="textarea" id="response" name="response" readonly/> -->
-<span>
-<textarea id="response" cols="10" readonly> 
-</textarea>
-</span>
+
 
 <br>
 
   <form accept-charset="UTF-8" action="javascript:void(0);" method="post">
       
 
-       	 <button  type="submit" class="yj-btn" onclick="getColor()" ><span>Get Color Count</span></button>
-		 <button  type="submit" class="yj-btn" onclick="getColorNname()" ><span>Get Color Count Name</span></button>
+  
 		 <br><br>
-		 <span>  <input placeholder="Query" aria-required="true" id="query" name="query" size="30" type="text" /></span><br>
+		 <span>  <input placeholder="Search Query for find venues" aria-required="true" id="query" name="query" size="30" type="text" /></span><br>
         <button  type="submit" class="yj-btn" onclick="getVenues()" ><span>Get Venues</span></button>
 
   </form>
+  
+    <form accept-charset="UTF-8" action="javascript:void(0);" method="post">
+      
+
+  
+		 <br><br>
+        <button  type="submit" class="yj-btn" onclick="getLog()" ><span>Get Log</span></button>
+
+  </form>
+  
+  
+  
+  
+  Your Location:
+
+<input type="text" id="lat" readonly>
 
 </section>
 
 
 </div>
 
-			
 
 
 

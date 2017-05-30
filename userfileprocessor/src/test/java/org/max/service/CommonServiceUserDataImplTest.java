@@ -71,7 +71,7 @@ public class CommonServiceUserDataImplTest{
 	 * 
 	 * Method checks the Number of records being pulled 
 	 */
-	//@Test
+	@Test
 	public void givenRecords_whenRecordsProcessed_thenNumberOfRecordsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given
@@ -83,7 +83,7 @@ public class CommonServiceUserDataImplTest{
 		List<UserRecordDisplay> record=(List<UserRecordDisplay>) service.execute();
 	   
 	   // Then
-	   assertEquals(5, record.size());
+	   assertEquals( record.size(),5);
 	}
 	
 	
@@ -92,7 +92,7 @@ public class CommonServiceUserDataImplTest{
 	 * 
 	 * Method checks the Number of records being pulled 
 	 */
-	//@Test
+	@Test
 	public void givenRecordsandColor_whenRecordsProcessed_thenNumberOfRecordsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given
@@ -104,7 +104,7 @@ public class CommonServiceUserDataImplTest{
 		List<UserRecordDisplay> record=(List<UserRecordDisplay>) service.execute();
 	   
 	   // Then
-	   assertEquals(5, 5);
+	   assertEquals(record.size(), 5);
 	}
 	
 

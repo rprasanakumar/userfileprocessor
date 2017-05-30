@@ -1,13 +1,20 @@
 package org.max.service.userfileprocessor.handler;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.StreamingOutput;
+import javax.ws.rs.core.Response;
 import org.max.service.userfileprocessor.bean.UserRecord;
 import org.max.service.userfileprocessor.bean.UserRecordDisplay;
 import org.max.service.userfileprocessor.bean.UserVenue;
@@ -20,8 +27,8 @@ import org.max.service.userfileprocessor.service.RecordCommonServiceImpl;
 import org.max.service.userfileprocessor.service.UserDataDisplayAPI;
 import org.max.service.userfileprocessor.service.UserDataDisplayColor;
 import org.max.service.userfileprocessor.service.UserDataDisplayColorName;
-import com.mysql.fabric.Response;
 
+import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
@@ -156,6 +163,17 @@ public  List<UserRecord> postUserRecord(UserRecord record){
 	return resultList;
 }
 
+
+@GET
+@Path("getlogfile") 
+@Produces(MediaType.APPLICATION_OCTET_STREAM)
+public Response getLogFile() {
+
+	   File file = new File("/tmp/warninglog.log");
+	    ResponseBuilder response = Response.ok((Object) file);
+	    response.header("Content-Disposition", "attachment; filename=newfile.zip");
+	    return response.build();
+}
 
 
 

@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.ibatis.io.Resources;
 import org.max.service.userfileprocessor.error.InvaidFormatException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -43,7 +44,6 @@ public class VaildFormatXML implements IFormatter{
 	@Override
 	public ArrayList<LinkedHashMap<String,String>> getVaildFormat() throws InvaidFormatException {
 		
-		File rd =null;
 		DocumentBuilderFactory dbFactory =null;
 		DocumentBuilder dBuilder =null;
 		
@@ -51,10 +51,12 @@ public class VaildFormatXML implements IFormatter{
 		if(pathXml!=null && !pathXml.trim().isEmpty()){
 			
 			try{
-				 rd= new File(pathXml);
+				//InputStream resourceAsStream = getClass().getResourceAsStream(pathXml);
+				//InputStream input = getClass().getResourceAsStream(pathXml);
+				InputStream reader = Resources.getResourceAsStream(pathXml);
 				 dbFactory = DocumentBuilderFactory.newInstance();
 			    dBuilder = dbFactory.newDocumentBuilder();
-			    Document document = dBuilder.parse(rd);
+			    Document document = dBuilder.parse(reader);
 			    document.getDocumentElement().normalize();
 			    NodeList nodeList = document.getElementsByTagName("format");
 			    for (int item = 0; item < nodeList.getLength(); item++) {

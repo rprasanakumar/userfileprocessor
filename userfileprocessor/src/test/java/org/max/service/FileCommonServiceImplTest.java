@@ -75,7 +75,7 @@ public class FileCommonServiceImplTest{
 	 * 
 	 * Method checks the Number of valid records being processed 
 	 */
-	//@Test
+	@Test
 	public void givenFileWithRecords_whenRecordsParsed_thenNumberOfValidRecordsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given

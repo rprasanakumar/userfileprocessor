@@ -10,7 +10,7 @@
 <mapper namespace="UserRecord">
 	
 	<resultMap id="result" type="UserRecord">
-	    <result property="iD" column="record_id"/>
+	    <result property="id" column="record_id"/>
 	    <result property="firstName" column="first_name"/>
 	    <result property="lastName" column="last_name"/>
 	    <result property="phoneNumber" column="phone_number"/>
@@ -26,6 +26,7 @@
 	
 	
 	 <insert id="insertBulkData" parameterType="java.util.List">
+	
 		INSERT INTO maxDBservice.USERRECORD 
         (
             first_name, last_name, phone_number,
@@ -38,11 +39,15 @@
             #{model.color}, #{model.zipCode}, #{model.address}     
         )
     </foreach>
+     
+	   <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+		  SELECT LAST_INSERT_ID() as id
+		</selectKey>
 	</insert>
 	
 	
 	
-	<insert id="insert" parameterType="java.util.List">
+	<insert id="insert" parameterType="java.util.List" >
 		INSERT INTO maxDBservice.USERRECORD 
         (
             first_name, last_name, phone_number,
@@ -53,6 +58,10 @@
             #{firstName}, #{lastName}, #{phoneNumber}, 
             #{color}, #{zipCode}, #{address}     
         )
+        
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+		  SELECT LAST_INSERT_ID() as id
+		</selectKey>
 	</insert>
 	
 	

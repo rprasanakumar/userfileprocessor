@@ -63,9 +63,9 @@ public class RequestHandlerTest {
 	 *  This test is to check the status code of the http response
 	 */
 	
-	public static final String BASE_URI = "http://localhost:8080/userfileprocessor/webapi/maxservice/";
-	//@Test
-	public void givenEndpointoftopURL_whenHTTPRequestIsMade_then200IsReceived()
+	public static final String BASE_URI = "http://localhost:8080/userfileprocessor/webapi/";
+	@Test
+	public void givenUserColorURL_whenHTTPRequestIsMade_then200IsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given
 	   HttpUriRequest request = new HttpGet(BASE_URI+"user/color");
@@ -83,30 +83,18 @@ public class RequestHandlerTest {
 	 * 
 	 *  This test is to check the response result
 	 */
-	//@Test
-	public void givenEndpointoftopURL_whenHTTPRequestIsMade_thenTopreferrerURLsAreReceived()
+	@Test
+	public void givenUserColorNameURL_whenHTTPRequestIsMade_then200IsReceived()
 	      throws ClientProtocolException, IOException{
 	   // Given
-	   HttpUriRequest request = new HttpGet(BASE_URI+"top");
+	   HttpUriRequest request = new HttpGet(BASE_URI+"user/name");
 	   
 	   // When
 	   HttpResponse httpResponse = new DefaultHttpClient().execute( request );
 	   
 	   // Then
 	   
-	   String json_string = EntityUtils.toString(httpResponse.getEntity());
-	   JSONArray temp1=null;
-	   try {
-		   temp1 = new JSONArray(json_string);
-		   	for(int i=0; i<temp1.length();i++){
-			  // 	 ReferrerURL ref = new ObjectMapper().readValue( temp1.getJSONObject(i).toString(),  ReferrerURL.class);
-
-			 	 //  assertEquals(Long.valueOf(17), ref.getHitCount());
-			   	}
-			   	
-	} catch (JSONException e) {
-		e.printStackTrace();
-	}
+	   assertEquals(Response.Status.OK.getStatusCode(), httpResponse.getStatusLine().getStatusCode());
 	
 	
 	}
@@ -115,8 +103,8 @@ public class RequestHandlerTest {
 	 * 
 	 *  This test is to check the status code of the http request for wrong url
 	 */
-	//@Test
-	public void givenWrongEndpointoftopURL_whenHTTPRequestIsMade_thenTopreferrerURLsAreReceived()
+	@Test
+	public void givenWrongEndpoint_whenHTTPRequestIsMade_thenTopreferrerURLsAreReceived()
 	      throws ClientProtocolException, IOException{
 		   // Given
 		   HttpUriRequest request = new HttpGet(BASE_URI+"topped");
